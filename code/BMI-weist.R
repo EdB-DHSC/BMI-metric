@@ -60,7 +60,8 @@ HSE %>% filter(BMI <= 50) %>%
 labs(title = 'BMI Profile of Adults in England',
      subtitle = 'BMI of over 18"s in HSE 15-17',
      y = '',
-     x = 'BMI')
+     x = 'BMI') +
+  theme(axis.text.y = element_blank()) 
 
 HSE %>% mutate(qimd = as.numeric(qimd),
                Sex = case_when(Sex == 1 ~ 'Male',
@@ -82,10 +83,11 @@ HSE %>% mutate(qimd = as.numeric(qimd),
   geom_vline(xintercept = 18.5, linetype = 2)+
   geom_vline(xintercept = 25, linetype = 2)+
   geom_vline(xintercept = 30, linetype = 2)+
-  geom_vline(xintercept = 40, linetype = 2)+
+  geom_vline(xintercept = 40, linetype = 2) +
   theme_bw()+
   facet_wrap(~Sex) +
   labs(title = 'BMI Profile of Adults in England by Depravation and Gender',
        subtitle = 'BMI of over 18"s in HSE 15-17',
        y = '',
-       x = 'BMI')
+       x = 'BMI') +
+  theme(axis.text.y = element_blank()) 
