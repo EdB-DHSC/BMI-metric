@@ -43,7 +43,8 @@ HSE2015 <- read_sav("C:/Users/EBeake/OneDrive - Department of Health and Social 
                  HSE2015)
 
 HSE %>% filter(BMI <= 50) %>% 
-  mutate(third = BMI_rounded - 6,
+  mutate(y2035 = BMI_rounded + 3.5,
+         third = BMI_rounded - 6,
          fith = BMI_rounded - 3.5,
          quarter = BMI_rounded - 4.5,
          BMI_cat = case_when(BMI_rounded <= 18.5 ~ 'underweight',
@@ -51,7 +52,7 @@ HSE %>% filter(BMI <= 50) %>%
                              BMI_rounded >= 25 & BMI_rounded < 30 ~ 'overweight',
                              BMI_rounded >= 30 & BMI_rounded < 40 ~ 'obese',
                              BMI_rounded >= 40 ~ 'sever obese')) %>% 
-  pivot_longer(cols = c('BMI_rounded','third','fith','quarter'),
+  pivot_longer(cols = c('y2035','BMI_rounded','third','fith','quarter'),
                names_to = 'target',
                values_to = 'BMI_rounded') %>% 
   group_by(BMI_rounded,target) %>% 
@@ -59,7 +60,7 @@ HSE %>% filter(BMI <= 50) %>%
   mutate(count = count * wt,
          target = str_replace(target,'third','Reduce adult obesity rates by a third by 2035'),
          target = str_replace(target,'BMI_rounded','Current'),
-#         target = str_replace(target,'stabalise','Halt the rise in adult obesity rates by 2030'),
+         target = str_replace(target,'y2035','BMI profile in 2035 if no further action is taken'),
          target = str_replace(target,'fith','Reduce adult obesity rates by a fith by 2035'),
          target = str_replace(target,'quarter','Reduce adult obesity rates by a quarter by 2035')) %>%
   ggplot(aes(BMI_rounded,count,col = target)) +
@@ -77,7 +78,8 @@ labs(title = 'BMI Profile of Adults in England',
         axis.ticks.x = element_blank(),
         legend.direction = 'vertical',
         legend.position = 'bottom') +
-  scale_color_manual(values=c("black",
+  scale_color_manual(values=c('grey',
+                              "black",
                               "#B39CE1",
                               "#F188F5",
                               "red"))
