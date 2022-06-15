@@ -71,10 +71,8 @@ HSE %>% filter(BMI <= 50) %>%
   geom_vline(xintercept = 40, linetype = 2)+
   theme_bw()+
 labs(title = 'BMI Profile of Adults in England',
- #    subtitle = "BMI of over 18's in HSE 2015-17",
      y = '',
-     x = 'BMI',
-     subtitle = '') +
+     x = 'BMI') +
   theme(axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
         legend.title = element_blank(),
